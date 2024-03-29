@@ -40,6 +40,9 @@ dependencies:
   http: ^1.1.0
   path_provider: ^2.0.5
   flutter_pdfview: ^1.0.1
+  permission_handler: ^10.0.0
+  lottie: ^2.7.0
+
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +70,7 @@ flutter:
   assets:
      - assets/icons/
      - assets/images/
+     - assets/lottiefiles/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

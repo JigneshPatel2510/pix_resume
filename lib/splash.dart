@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pix_resume/bottomtabbar.dart';
-import 'package:pix_resume/hometab.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -15,7 +15,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(const Duration(seconds: 3),() {
+    Future.delayed(const Duration(seconds: 5),() {
       Get.to(const BottomTabBar());
 
     },);
@@ -24,14 +24,16 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurpleAccent,
-      body: Container(
+      body: SizedBox(
+        height: double.maxFinite,
+        width: double.maxFinite,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset("assets/icons/ic_splash.png"),
-              SizedBox(height: 10),
-              Text("CV Maker",style: TextStyle(color: Colors.white,fontSize: 30),)
+              Lottie.asset('assets/lottiefiles/splash_.json'),
+              const SizedBox(height: 10),
+              const Text("CV Maker",style: TextStyle(color: Colors.white,fontSize: 30),)
             ],
           ),
         ),
