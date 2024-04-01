@@ -11,6 +11,7 @@ class Education extends StatefulWidget {
 }
 
 class _EducationState extends State<Education> {
+  final _formKey = GlobalKey<FormState>();
   DetailsController detailsController=Get.find();
   @override
   Widget build(BuildContext context) {
@@ -32,153 +33,189 @@ class _EducationState extends State<Education> {
                 fontWeight: FontWeight.w900,
                 letterSpacing: .5)),
       ),
-      body:  SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text("Degree Name",style:TextStyle(
-                    fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
-                ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey.shade400)
+      body:  Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text("Degree Name",style:TextStyle(
+                      fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
                   ),
-                  child:  TextField(
-                    controller: detailsController.degreeName,
-                    decoration: InputDecoration(
-                        hintText: "Enter Your Degree Name",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 10)
-                    ),
-                  )),
-
-              const SizedBox(height: 15,),
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text("Institute Name",style:TextStyle(
-                    fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
                 ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey.shade400)
-                  ),
-                  child:  TextField(
-                    controller: detailsController.instituteName,
-                    decoration: InputDecoration(
-                        hintText: "Enter Your Institute Name",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.grey.shade400)
                     ),
-                  )),
+                    child:  TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please  enter your degree name';
+                        }
+                        return null;
+                      },
+                      controller: detailsController.degreeName,
+                      decoration: InputDecoration(
+                          hintText: "Enter Your Degree Name",
+                          hintStyle: TextStyle(color: Colors.grey.shade400),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                      ),
+                    )),
 
-              const SizedBox(height: 15,),
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text("Institute Address",style:TextStyle(
-                    fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
+                const SizedBox(height: 15,),
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text("Institute Name",style:TextStyle(
+                      fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
+                  ),
                 ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey.shade400)
-                  ),
-                  child:  TextField(
-                    controller: detailsController.instituteAddress,
-                    decoration: InputDecoration(
-                        hintText: "Enter Institute Address",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.grey.shade400)
                     ),
-                  )),
+                    child:  TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please  enter your institute name';
+                        }
+                        return null;
+                      },
+                      controller: detailsController.instituteName,
+                      decoration: InputDecoration(
+                          hintText: "Enter Your Institute Name",
+                          hintStyle: TextStyle(color: Colors.grey.shade400),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                      ),
+                    )),
 
-              const SizedBox(height: 15,),
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text("Degree Year",style:TextStyle(
-                    fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
+                const SizedBox(height: 15,),
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text("Institute Address",style:TextStyle(
+                      fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
+                  ),
                 ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey.shade400)
-                  ),
-                  child:  TextField(
-                    controller: detailsController.degreeYear,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        hintText: "Enter Your Degree Year",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.grey.shade400)
                     ),
-                  )),
+                    child:  TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please  enter your institute address';
+                        }
+                        return null;
+                      },
+                      controller: detailsController.instituteAddress,
+                      decoration: InputDecoration(
+                          hintText: "Enter Institute Address",
+                          hintStyle: TextStyle(color: Colors.grey.shade400),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                      ),
+                    )),
 
-              const SizedBox(height: 15,),
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text("Description",style:TextStyle(
-                    fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
+                const SizedBox(height: 15,),
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text("Degree Year",style:TextStyle(
+                      fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
+                  ),
                 ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey.shade400)
-                  ),
-                  child:  TextField(
-                    maxLines: 3,
-                    controller: detailsController.degreeDescription,
-                    decoration: InputDecoration(
-                        hintText: "Description",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.grey.shade400)
                     ),
-                  )),
+                    child:  TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please  enter your degree year ';
+                        }
+                        return null;
+                      },
+                      controller: detailsController.degreeYear,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                          hintText: "Enter Your Degree Year",
+                          hintStyle: TextStyle(color: Colors.grey.shade400),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                      ),
+                    )),
 
-              const SizedBox(height: 15,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  InkWell(
-                    borderRadius: BorderRadius.circular(10),
-                    onTap: () {
-                      detailsController.addEducation();
-                    },
-                    child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: const Color(0xff0D74FF),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 30,vertical: 8),
-                          child: Text("Done",style: TextStyle(color: Colors.white,letterSpacing: .5,fontWeight: FontWeight.w900),),
-                        )),
-                  )
-                ],
-              ),
-              const SizedBox(height: 15,),
+                const SizedBox(height: 15,),
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text("Description",style:TextStyle(
+                      fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
+                  ),
+                ),
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.grey.shade400)
+                    ),
+                    child:  TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please  enter some text';
+                        }
+                        return null;
+                      },
+                      maxLines: 3,
+                      controller: detailsController.degreeDescription,
+                      decoration: InputDecoration(
+                          hintText: "Description",
+                          hintStyle: TextStyle(color: Colors.grey.shade400),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10)
+                      ),
+                    )),
 
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: detailsController.education.length,
-                itemBuilder: (context, index) {
-                return EducationItems(index: index,data: detailsController.education[index],);
-              },)
-            ],
+                const SizedBox(height: 15,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      borderRadius: BorderRadius.circular(10),
+                      onTap: () {
+                        if (_formKey.currentState!.validate()){
+                          detailsController.addEducation();
+                        };
+
+                      },
+                      child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: const Color(0xff0D74FF),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 30,vertical: 8),
+                            child: Text("Done",style: TextStyle(color: Colors.white,letterSpacing: .5,fontWeight: FontWeight.w900),),
+                          )),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 15,),
+
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: detailsController.education.length,
+                  itemBuilder: (context, index) {
+                  return EducationItems(index: index,data: detailsController.education[index],);
+                },)
+              ],
+            ),
           ),
         ),
       ),

@@ -11,6 +11,7 @@ class WorkExperience extends StatefulWidget {
 }
 
 class _WorkExperienceState extends State<WorkExperience> {
+  final _formKey = GlobalKey<FormState>();
   DetailsController detailsController=Get.find();
   @override
   Widget build(BuildContext context) {
@@ -32,155 +33,191 @@ class _WorkExperienceState extends State<WorkExperience> {
                 fontWeight: FontWeight.w900,
                 letterSpacing: .5)),
       ),
-      body: SingleChildScrollView(
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
 
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text("Company Name",style:TextStyle(
-                    fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
-                ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey.shade400)
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text("Company Name",style:TextStyle(
+                      fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
                   ),
-                  child:  TextField(
-                    controller: detailsController.companyName,
-                    decoration: InputDecoration(
-                        hintText: "Enter Company Name",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 10)
-                    ),
-                  )),
-
-              const SizedBox(height: 15,),
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text("Company Address",style:TextStyle(
-                    fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
                 ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey.shade400)
-                  ),
-                  child:  TextField(
-                    controller: detailsController.companyAddress,
-                    decoration: InputDecoration(
-                        hintText: "Enter Company Address",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.grey.shade400)
                     ),
-                  )),
+                    child:  TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter company name';
+                        }
+                        return null;
+                      },
+                      controller: detailsController.companyName,
+                      decoration: InputDecoration(
+                          hintText: "Enter Company Name",
+                          hintStyle: TextStyle(color: Colors.grey.shade400),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                      ),
+                    )),
 
-              const SizedBox(height: 15,),
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text("Level Of Position",style:TextStyle(
-                    fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
+                const SizedBox(height: 15,),
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text("Company Address",style:TextStyle(
+                      fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
+                  ),
                 ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey.shade400)
-                  ),
-                  child:  TextField(
-                    controller: detailsController.levelOfPosition,
-                    decoration: InputDecoration(
-                        hintText: "Enter Your Level Of Position",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.grey.shade400)
                     ),
-                  )),
+                    child:  TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter company address';
+                        }
+                        return null;
+                      },
+                      controller: detailsController.companyAddress,
+                      decoration: InputDecoration(
+                          hintText: "Enter Company Address",
+                          hintStyle: TextStyle(color: Colors.grey.shade400),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                      ),
+                    )),
 
-              const SizedBox(height: 15,),
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text("Year",style:TextStyle(
-                    fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
+                const SizedBox(height: 15,),
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text("Level Of Position",style:TextStyle(
+                      fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
+                  ),
                 ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey.shade400)
-                  ),
-                  child:  TextField(
-                    controller: detailsController.workYear,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        hintText: "Enter Your Experience Year",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.grey.shade400)
                     ),
-                  )),
+                    child:  TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter level of position';
+                        }
+                        return null;
+                      },
+                      controller: detailsController.levelOfPosition,
+                      decoration: InputDecoration(
+                          hintText: "Enter Your Level Of Position",
+                          hintStyle: TextStyle(color: Colors.grey.shade400),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                      ),
+                    )),
 
-              const SizedBox(height: 15,),
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text("Description",style:TextStyle(
-                    fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
+                const SizedBox(height: 15,),
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text("Year",style:TextStyle(
+                      fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
+                  ),
                 ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey.shade400)
-                  ),
-                  child:  TextField(
-                    maxLines: 3,
-                    controller: detailsController.experienceDescription,
-                    decoration: InputDecoration(
-                        hintText: "Description",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.grey.shade400)
                     ),
-                  )),
-              const SizedBox(height: 15,),
-               Row(
-                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  InkWell(
-                    borderRadius: BorderRadius.circular(10),
-                    onTap: () {
-                      detailsController.addExperience();
-                    },
-                    child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: const Color(0xff0D74FF),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 30,vertical: 8),
-                          child: Text("Done",style: TextStyle(color: Colors.white,letterSpacing: .5,fontWeight: FontWeight.w900),),
-                        )),
-                  )
-                ],
-              ),
-              const SizedBox(height: 15,),
+                    child:  TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter experience year';
+                        }
+                        return null;
+                      },
+                      controller: detailsController.workYear,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                          hintText: "Enter Your Experience Year",
+                          hintStyle: TextStyle(color: Colors.grey.shade400),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                      ),
+                    )),
 
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: detailsController.experience.length,
-                itemBuilder: (context, index) {
-                return ExperienceItem(data: detailsController.experience[index],index: index,);
-              },)
+                const SizedBox(height: 15,),
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text("Description",style:TextStyle(
+                      fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
+                  ),
+                ),
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.grey.shade400)
+                    ),
+                    child:  TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      maxLines: 3,
+                      controller: detailsController.experienceDescription,
+                      decoration: InputDecoration(
+                          hintText: "Description",
+                          hintStyle: TextStyle(color: Colors.grey.shade400),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10)
+                      ),
+                    )),
+                const SizedBox(height: 15,),
+                 Row(
+                   mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      borderRadius: BorderRadius.circular(10),
+                      onTap: () {
+                        if (_formKey.currentState!.validate()){
+                          detailsController.addExperience();
+                        }
+
+                      },
+                      child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: const Color(0xff0D74FF),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 30,vertical: 8),
+                            child: Text("Done",style: TextStyle(color: Colors.white,letterSpacing: .5,fontWeight: FontWeight.w900),),
+                          )),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 15,),
+
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: detailsController.experience.length,
+                  itemBuilder: (context, index) {
+                  return ExperienceItem(data: detailsController.experience[index],index: index,);
+                },)
 
 
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -191,14 +228,6 @@ class _WorkExperienceState extends State<WorkExperience> {
         child: InkWell(
           borderRadius: BorderRadius.circular(25),
           onTap: () {
-
-
-
-
-
-
-
-
 
             debugPrint(detailsController.companyName.text);
             debugPrint(detailsController.companyAddress.text);

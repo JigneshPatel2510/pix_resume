@@ -11,6 +11,7 @@ class Languages extends StatefulWidget {
 
 class _LanguagesState extends State<Languages> {
   DetailsController detailsController=Get.find();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,36 +32,45 @@ class _LanguagesState extends State<Languages> {
                 fontWeight: FontWeight.w900,
                 letterSpacing: .5)),
       ),
-      body:  SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text("Languages Name",style:TextStyle(
-                    fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
-                ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey.shade400)
+      body:  Form(
+        key:_formKey ,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text("Languages Name",style:TextStyle(
+                      fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
                   ),
-                  child:  TextField(
-                    controller: detailsController.languages,
-                    decoration: InputDecoration(
-                        hintText: "Enter Your Languages Name",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                ),
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.grey.shade400)
                     ),
-                  )),
+                    child:  TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your languages name';
+                        }
+                        return null;
+                      },
+                      controller: detailsController.languages,
+                      decoration: InputDecoration(
+                          hintText: "Enter Your Languages Name",
+                          hintStyle: TextStyle(color: Colors.grey.shade400),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10)
+                      ),
+                    )),
 
-              const SizedBox(height: 15,),
+                const SizedBox(height: 15,),
 
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -71,6 +81,9 @@ class _LanguagesState extends State<Languages> {
         child: InkWell(
           borderRadius: BorderRadius.circular(25),
           onTap: () {
+            if (_formKey.currentState!.validate()){
+              Get.back();
+            }
             debugPrint(detailsController.languages.text);
 
           },

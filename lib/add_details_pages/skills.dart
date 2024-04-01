@@ -13,6 +13,7 @@ class Skills extends StatefulWidget {
 
 class _SkillsState extends State<Skills> {
   DetailsController detailsController=Get.find();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,46 +34,55 @@ class _SkillsState extends State<Skills> {
                 fontWeight: FontWeight.w900,
                 letterSpacing: .5)),
       ),
-      body:  SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text("Skill Name",style:TextStyle(
-                    fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
-                ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey.shade400)
+      body:  Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text("Skill Name",style:TextStyle(
+                      fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 12),
                   ),
-                  child:  TextField(
-                    maxLines: 4,
-                    readOnly: true,
-                    onTap: () async {
-                      var skillResult = await Get.to(const SkillsName(),binding: BindingController());
-                      if(skillResult!=null){
-                        detailsController.skills.text=skillResult;
-                      }
-                    },
-                    controller: detailsController.skills,
-                    decoration: InputDecoration(
-                       focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        hintText: "Enter Your Skill Name",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10)
+                ),
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.grey.shade400)
                     ),
-                  )),
+                    child:  TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your skill';
+                        }
+                        return null;
+                      },
+                      maxLines: 4,
+                      readOnly: true,
+                      onTap: () async {
+                        var skillResult = await Get.to(const SkillsName(),binding: BindingController());
+                        if(skillResult!=null){
+                          detailsController.skills.text=skillResult;
+                        }
+                      },
+                      controller: detailsController.skills,
+                      decoration: InputDecoration(
+                         focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          hintText: "Enter Your Skill Name",
+                          hintStyle: TextStyle(color: Colors.grey.shade400),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10)
+                      ),
+                    )),
 
-              const SizedBox(height: 15,),
+                const SizedBox(height: 15,),
 
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -83,7 +93,10 @@ class _SkillsState extends State<Skills> {
         child: InkWell(
           borderRadius: BorderRadius.circular(25),
           onTap: () {
-            debugPrint(detailsController.skills.text);
+            if (_formKey.currentState!.validate()){
+              Get.back();
+            }
+              debugPrint(detailsController.skills.text);
 
           },
           child: Material(

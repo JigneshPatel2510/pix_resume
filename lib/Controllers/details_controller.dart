@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pix_resume/pdf_preview.dart';
 
@@ -30,16 +31,36 @@ class DetailsController extends GetxController {
   TextEditingController academyAddress = TextEditingController();
   TextEditingController certificateYear = TextEditingController();
   TextEditingController languages = TextEditingController();
+  XFile? pImage;
+  String? pBase64Image;
+
+  // final ImagePicker picker = ImagePicker();
+
+  Future<bool> pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    File imageFile = File(image!.path);
+    List<int> imageBytes = await imageFile.readAsBytes();
+    String base64Image = base64Encode(imageBytes);
+    if (image != null) {
+      pImage = image;
+      pBase64Image = base64Image;
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   List<dynamic> experience = [];
 
   addExperience() {
     Map<String, dynamic> experienceDetails = {
-      "company_name": companyName,
-      "company_address": companyAddress,
-      "level_of_position": levelOfPosition,
-      "work_year": workYear,
-      "experience_description": experienceDescription,
+      "company_name": companyName.text,
+      "company_address": companyAddress.text,
+      "level_of_position": levelOfPosition.text,
+      "work_year": workYear.text,
+      "experience_description": experienceDescription.text,
     };
 
     experience.add(experienceDetails);
@@ -55,11 +76,11 @@ class DetailsController extends GetxController {
 
   addEducation() {
     Map<String, dynamic> educationDetails = {
-      "degree_name": degreeName,
-      "institute_name": instituteName,
-      "institute_address": instituteAddress,
-      "degree_year": degreeYear,
-      "description": degreeDescription,
+      "degree_name": degreeName.text,
+      "institute_name": instituteName.text,
+      "institute_address": instituteAddress.text,
+      "degree_year": degreeYear.text,
+      "description": degreeDescription.text,
     };
 
     experience.add(educationDetails);
@@ -75,10 +96,10 @@ class DetailsController extends GetxController {
 
   addCertificate() {
     Map<String, dynamic> certificateDetails = {
-      "name_of_certificate": nameOfCertificate,
-      "academy_name": academyName,
-      "academy_address": academyAddress,
-      "certificate_year": certificateYear,
+      "name_of_certificate": nameOfCertificate.text,
+      "academy_name": academyName.text,
+      "academy_address": academyAddress.text,
+      "certificate_year": certificateYear.text,
     };
 
     experience.add(certificateDetails);
@@ -101,14 +122,14 @@ class DetailsController extends GetxController {
 
   showPreview() async {
     var body = {
-      // "profile_photo":"",
+      "profile_photo": pBase64Image,
       "name": fullName.text,
-      // "designation": designation,
+      "designation": designation.text,
       "email": email.text,
-      // "social_media_link": socialMediaLink,
-      // "mobile_number": mobileNumber,
-      // "address": address,
-      // "summary": summary,
+      "social_media_link": socialMediaLink.text,
+      "mobile_number": mobileNumber.text,
+      "address": address.text,
+      "summary": summary.text,
       // "work_experience":experience,   //List
       // "company_name": companyName,
       // "company_address": companyAddress,
@@ -123,13 +144,13 @@ class DetailsController extends GetxController {
       // "degree_year": degreeYear,
       // "degree_description": degreeDescription,
 
-      // "skills": skills,
+      "skills": skills.text,
       // "certificates":certificate,   //List
       // "name_of_certificate": nameOfCertificate,
       // "academy_name": academyName,
       // "academy_address": academyAddress,
       // "certificate_year": certificateYear,
-      // "languages": languages,
+      "languages": languages.text,
     };
 
     http.Response response = await http.post(
@@ -137,7 +158,7 @@ class DetailsController extends GetxController {
         body: body);
     if (response.statusCode == 200) {
       // var data = jsonDecode(response.body);
-      var urlData=response.body;
+      var urlData = response.body;
       downloadFile(urlData);
     }
   }
@@ -154,6 +175,8 @@ class DetailsController extends GetxController {
     await file.writeAsBytes(response.bodyBytes);
 
     downloading.value = false;
-    Get.to(Preview(filePath: filePath,));
+    Get.to(Preview(
+      filePath: filePath,
+    ));
   }
 }
