@@ -53,12 +53,15 @@ class _CertificatesState extends State<Certificates> {
                         border: Border.all(color: Colors.grey.shade400)
                     ),
                     child:  TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter name of certificate';
-                        }
-                        return null;
-                      },
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if (value == null || value.isEmpty) {
+                      //     return 'Please enter name of certificate';
+                      //   }
+                      //   return null;
+                      // },
                       controller: detailsController.nameOfCertificate,
                       decoration: InputDecoration(
                           hintText: "Enter Certificate Name",
@@ -81,12 +84,15 @@ class _CertificatesState extends State<Certificates> {
                         border: Border.all(color: Colors.grey.shade400)
                     ),
                     child:  TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter academy name';
-                        }
-                        return null;
-                      },
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if (value == null || value.isEmpty) {
+                      //     return 'Please enter academy name';
+                      //   }
+                      //   return null;
+                      // },
                       controller: detailsController.academyName,
                       decoration: InputDecoration(
                           hintText: "Enter Academy Name",
@@ -109,12 +115,15 @@ class _CertificatesState extends State<Certificates> {
                         border: Border.all(color: Colors.grey.shade400)
                     ),
                     child:  TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter academy address';
-                        }
-                        return null;
-                      },
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if (value == null || value.isEmpty) {
+                      //     return 'Please enter academy address';
+                      //   }
+                      //   return null;
+                      // },
                       controller: detailsController.academyAddress,
                       decoration: InputDecoration(
                           hintText: "Enter Academy Address",
@@ -137,12 +146,15 @@ class _CertificatesState extends State<Certificates> {
                         border: Border.all(color: Colors.grey.shade400)
                     ),
                     child:  TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter certificate year';
-                        }
-                        return null;
-                      },
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if (value == null || value.isEmpty) {
+                      //     return 'Please enter certificate year';
+                      //   }
+                      //   return null;
+                      // },
                       controller: detailsController.certificateYear,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
@@ -160,10 +172,19 @@ class _CertificatesState extends State<Certificates> {
                     InkWell(
                       borderRadius: BorderRadius.circular(10),
                       onTap: () {
-                        if (_formKey.currentState!.validate()){
+                        // if (_formKey.currentState!.validate()){
+                        //   detailsController.addCertificate();
+                        // }
+                        if(detailsController.nameOfCertificate.text.isEmpty){
+                          detailsController.showValidator(msg: "Enter Certificate Name");
+                        }else if(detailsController.academyName.text.isEmpty){
+                          detailsController.showValidator(msg: "Enter Academy Name");
+                        }else if(detailsController.academyAddress.text.isEmpty){
+                          detailsController.showValidator(msg: "Enter Academy Address");
+                        }else if(detailsController.certificateYear.text.isEmpty){
+                          detailsController.showValidator(msg: "Enter Your Certificate Year");
+                        }else{
                           detailsController.addCertificate();
-
-
                         }
 
                       },
@@ -180,12 +201,15 @@ class _CertificatesState extends State<Certificates> {
                   ],
                 ),
                 const SizedBox(height: 15,),
-                ListView.builder(
+                Obx(() => ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: detailsController.certificate.length,
                   itemBuilder: (context, index) {
-                  return CertificateItems(index: index,data: detailsController.certificate[index],);
-                },)
+                    return CertificateItems(index: index,data: detailsController.certificate[index],);
+                  }, separatorBuilder: (BuildContext context, int index) {
+                    return const Divider(color: Colors.transparent,);
+                },))
               ],
             ),
           ),
@@ -198,6 +222,7 @@ class _CertificatesState extends State<Certificates> {
         child: InkWell(
           borderRadius: BorderRadius.circular(25),
           onTap: () {
+            Get.back();
             debugPrint(detailsController.nameOfCertificate.text);
             debugPrint(detailsController.academyName.text);
             debugPrint(detailsController.academyAddress.text);

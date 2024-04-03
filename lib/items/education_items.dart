@@ -50,7 +50,7 @@ class EducationItems extends StatelessWidget {
               children: [
                 const Text("Description : "),
                 const Spacer(),
-                Flexible(child: Text(data['description']),),
+                Flexible(child: Text(data['description'],overflow: TextOverflow.ellipsis),),
               ],
             ),
           ],

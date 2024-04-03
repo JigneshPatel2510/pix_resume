@@ -52,12 +52,15 @@ class _LanguagesState extends State<Languages> {
                         border: Border.all(color: Colors.grey.shade400)
                     ),
                     child:  TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your languages name';
-                        }
-                        return null;
-                      },
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if (value == null || value.isEmpty) {
+                      //     return 'Please enter your languages name';
+                      //   }
+                      //   return null;
+                      // },
                       controller: detailsController.languages,
                       decoration: InputDecoration(
                           hintText: "Enter Your Languages Name",
@@ -81,7 +84,12 @@ class _LanguagesState extends State<Languages> {
         child: InkWell(
           borderRadius: BorderRadius.circular(25),
           onTap: () {
-            if (_formKey.currentState!.validate()){
+            // if (_formKey.currentState!.validate()){
+            //   Get.back();
+            // }
+            if(detailsController.languages.text.isEmpty){
+              detailsController.showValidator(msg: "Enter Your Languages Name");
+            }else{
               Get.back();
             }
             debugPrint(detailsController.languages.text);

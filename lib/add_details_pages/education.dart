@@ -53,12 +53,15 @@ class _EducationState extends State<Education> {
                         border: Border.all(color: Colors.grey.shade400)
                     ),
                     child:  TextFormField(
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please  enter your degree name';
-                        }
-                        return null;
-                      },
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return 'Please  enter your degree name';
+                      //   }
+                      //   return null;
+                      // },
                       controller: detailsController.degreeName,
                       decoration: InputDecoration(
                           hintText: "Enter Your Degree Name",
@@ -81,12 +84,15 @@ class _EducationState extends State<Education> {
                         border: Border.all(color: Colors.grey.shade400)
                     ),
                     child:  TextFormField(
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please  enter your institute name';
-                        }
-                        return null;
-                      },
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return 'Please  enter your institute name';
+                      //   }
+                      //   return null;
+                      // },
                       controller: detailsController.instituteName,
                       decoration: InputDecoration(
                           hintText: "Enter Your Institute Name",
@@ -109,12 +115,15 @@ class _EducationState extends State<Education> {
                         border: Border.all(color: Colors.grey.shade400)
                     ),
                     child:  TextFormField(
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please  enter your institute address';
-                        }
-                        return null;
-                      },
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return 'Please  enter your institute address';
+                      //   }
+                      //   return null;
+                      // },
                       controller: detailsController.instituteAddress,
                       decoration: InputDecoration(
                           hintText: "Enter Institute Address",
@@ -137,12 +146,15 @@ class _EducationState extends State<Education> {
                         border: Border.all(color: Colors.grey.shade400)
                     ),
                     child:  TextFormField(
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please  enter your degree year ';
-                        }
-                        return null;
-                      },
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return 'Please  enter your degree year ';
+                      //   }
+                      //   return null;
+                      // },
                       controller: detailsController.degreeYear,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
@@ -166,12 +178,16 @@ class _EducationState extends State<Education> {
                         border: Border.all(color: Colors.grey.shade400)
                     ),
                     child:  TextFormField(
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please  enter some text';
-                        }
-                        return null;
-                      },
+                      textInputAction: TextInputAction.done,
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return 'Please  enter some text';
+                      //   }
+                      //   return null;
+                      // },
                       maxLines: 3,
                       controller: detailsController.degreeDescription,
                       decoration: InputDecoration(
@@ -189,9 +205,22 @@ class _EducationState extends State<Education> {
                     InkWell(
                       borderRadius: BorderRadius.circular(10),
                       onTap: () {
-                        if (_formKey.currentState!.validate()){
+                        // if (_formKey.currentState!.validate()){
+                        //   detailsController.addEducation();
+                        // };
+                        if(detailsController.degreeName.text.isEmpty){
+                          detailsController.showValidator(msg: "Enter Your Degree Name");
+                        }else if(detailsController.instituteName.text.isEmpty){
+                          detailsController.showValidator(msg: "Enter Your Institute Name");
+                        }else if(detailsController.instituteAddress.text.isEmpty){
+                          detailsController.showValidator(msg: "Enter Your Institute Address");
+                        }else if(detailsController.degreeYear.text.isEmpty){
+                          detailsController.showValidator(msg: "Enter Your Degree Year");
+                        }else if(detailsController.degreeDescription.text.isEmpty){
+                          detailsController.showValidator(msg: "Enter Some Text");
+                        }else{
                           detailsController.addEducation();
-                        };
+                        }
 
                       },
                       child: Container(
@@ -208,12 +237,15 @@ class _EducationState extends State<Education> {
                 ),
                 const SizedBox(height: 15,),
 
-                ListView.builder(
+                Obx(() => ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: detailsController.education.length,
                   itemBuilder: (context, index) {
-                  return EducationItems(index: index,data: detailsController.education[index],);
-                },)
+                    return EducationItems(data: detailsController.education[index],index: index,);
+                  }, separatorBuilder: (BuildContext context, int index) {
+                    return const Divider(color: Colors.transparent,);
+                },))
               ],
             ),
           ),
@@ -226,6 +258,7 @@ class _EducationState extends State<Education> {
         child: InkWell(
           borderRadius: BorderRadius.circular(25),
           onTap: () {
+            Get.back();
             debugPrint(detailsController.degreeName.text);
             debugPrint(detailsController.instituteName.text);
             debugPrint(detailsController.instituteAddress.text);

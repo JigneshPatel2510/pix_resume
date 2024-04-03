@@ -52,12 +52,15 @@ class _SummaryState extends State<Summary> {
                         border: Border.all(color: Colors.grey.shade400)
                     ),
                     child:  TextFormField(
-                      validator: (value) {
-                        if(value==null || value.isEmpty){
-                          return "Please enter some text";
-                        }
-                        return null;
-                      },
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if(value==null || value.isEmpty){
+                      //     return "Please enter some text";
+                      //   }
+                      //   return null;
+                      // },
 
                       controller: detailsController.summary,
                       maxLines: 4,
@@ -84,7 +87,12 @@ class _SummaryState extends State<Summary> {
         child: InkWell(
           borderRadius: BorderRadius.circular(25),
           onTap: () {
-            if (_formKey.currentState!.validate()){
+            // if (_formKey.currentState!.validate()){
+            //   Get.back();
+            // }
+            if(detailsController.summary.text.isEmpty){
+              detailsController.showValidator(msg: "Please Enter Some Text");
+            }else{
               Get.back();
             }
             debugPrint(detailsController.summary.text);

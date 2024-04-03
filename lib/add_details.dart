@@ -16,7 +16,8 @@ import 'package:pix_resume/add_details_pages/work_experience.dart';
 import 'package:http/http.dart' as http;
 
 class AddDetails extends StatefulWidget {
-  const AddDetails({super.key});
+
+  const AddDetails({super.key,});
 
   @override
   State<AddDetails> createState() => _AddDetailsState();
@@ -214,6 +215,7 @@ class _AddDetailsState extends State<AddDetails> {
       floatingActionButton: InkWell(
         borderRadius: BorderRadius.circular(35),
         onTap: () {
+
           detailsController.showPreview();
 
 

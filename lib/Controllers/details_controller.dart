@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -34,6 +35,8 @@ class DetailsController extends GetxController {
   XFile? pImage;
   String? pBase64Image;
 
+  String template="";
+
   // final ImagePicker picker = ImagePicker();
 
   Future<bool> pickImage() async {
@@ -52,7 +55,7 @@ class DetailsController extends GetxController {
     }
   }
 
-  List<dynamic> experience = [];
+  RxList<dynamic> experience = [].obs;
 
   addExperience() {
     Map<String, dynamic> experienceDetails = {
@@ -72,7 +75,7 @@ class DetailsController extends GetxController {
     experienceDescription.clear();
   }
 
-  List<dynamic> education = [];
+  RxList<dynamic> education = [].obs;
 
   addEducation() {
     Map<String, dynamic> educationDetails = {
@@ -83,7 +86,7 @@ class DetailsController extends GetxController {
       "description": degreeDescription.text,
     };
 
-    experience.add(educationDetails);
+    education.add(educationDetails);
 
     degreeName.clear();
     instituteName.clear();
@@ -92,7 +95,7 @@ class DetailsController extends GetxController {
     degreeDescription.clear();
   }
 
-  List<dynamic> certificate = [];
+  RxList<dynamic> certificate = [].obs;
 
   addCertificate() {
     Map<String, dynamic> certificateDetails = {
@@ -102,7 +105,7 @@ class DetailsController extends GetxController {
       "certificate_year": certificateYear.text,
     };
 
-    experience.add(certificateDetails);
+    certificate.add(certificateDetails);
 
     nameOfCertificate.clear();
     academyName.clear();
@@ -122,14 +125,15 @@ class DetailsController extends GetxController {
 
   showPreview() async {
     var body = {
-      "profile_photo": pBase64Image,
-      "name": fullName.text,
-      "designation": designation.text,
-      "email": email.text,
-      "social_media_link": socialMediaLink.text,
-      "mobile_number": mobileNumber.text,
-      "address": address.text,
-      "summary": summary.text,
+      "temp_name": template,
+      // "profile_photo": pBase64Image,
+      // "name": fullName.text,
+      // "designation": designation.text,
+      // "email": email.text,
+      // "social_media_link": socialMediaLink.text,
+      // "mobile_number": mobileNumber.text,
+      // "address": address.text,
+      // "summary": summary.text,
       // "work_experience":experience,   //List
       // "company_name": companyName,
       // "company_address": companyAddress,
@@ -144,17 +148,17 @@ class DetailsController extends GetxController {
       // "degree_year": degreeYear,
       // "degree_description": degreeDescription,
 
-      "skills": skills.text,
+      // "skills": skills.text,
       // "certificates":certificate,   //List
       // "name_of_certificate": nameOfCertificate,
       // "academy_name": academyName,
       // "academy_address": academyAddress,
       // "certificate_year": certificateYear,
-      "languages": languages.text,
+      // "languages": languages.text,
     };
 
     http.Response response = await http.post(
-        Uri.parse("https://codinghouse.in/resume/ResumeBuilder/GeneratePdf"),
+        Uri.parse("https://codinghouse.in/resume/ResumeBuilder/GeneratePdf1"),
         body: body);
     if (response.statusCode == 200) {
       // var data = jsonDecode(response.body);
@@ -179,4 +183,32 @@ class DetailsController extends GetxController {
       filePath: filePath,
     ));
   }
+
+  showValidator({msg}){
+    Fluttertoast.showToast(
+      msg: msg,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM ,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.black38,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+  }
+
+
+RxList templatesList=[].obs;
+
+  Future<void> showTemplates() async {
+
+  var response = await http.get(Uri.parse("https://codinghouse.in/resume/ResumeBuilder/GetTemplates"));
+  if(response.statusCode==200){
+    var templatesData=jsonDecode(response.body);
+    templatesList.value=templatesData["data"];
+  }
+
+
+}
+
+
 }

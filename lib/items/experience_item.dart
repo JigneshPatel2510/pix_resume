@@ -43,14 +43,14 @@ class ExperienceItem extends StatelessWidget {
               children: [
                 const Text("Year : "),
                 const Spacer(),
-                Text(data['year']),
+                Text(data['work_year']),
               ],
             ),
             Row(
               children: [
                 const Text("Description : "),
                 const Spacer(),
-                Flexible(child: Text(data['description']),),
+                Flexible(child: Text(data['experience_description'],overflow:TextOverflow.ellipsis),),
               ],
             ),
           ],

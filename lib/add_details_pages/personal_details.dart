@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pix_resume/Controllers/details_controller.dart';
 
@@ -138,12 +139,15 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(color: Colors.grey.shade400)),
                     child: TextFormField(
-                      validator: (value) {
-                        if(value==null || value.isEmpty){
-                          return "Please enter your name";
-                        }
-                        return null;
-                      },
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if(value==null || value.isEmpty){
+                      //     return "Please enter your name";
+                      //   }
+                      //   return null;
+                      // },
                       controller: detailsController.fullName,
                       decoration: InputDecoration(
                           hintText: "Enter Your Full Name",
@@ -170,12 +174,15 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(color: Colors.grey.shade400)),
                     child: TextFormField(
-                      validator: (value) {
-                        if(value==null || value.isEmpty){
-                          return "Please enter your designation";
-                        }
-                        return null;
-                      },
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if(value==null || value.isEmpty){
+                      //     return "Please enter your designation";
+                      //   }
+                      //   return null;
+                      // },
                       controller: detailsController.designation,
                       decoration: InputDecoration(
                           hintText: "Enter Your Designation",
@@ -196,7 +203,24 @@ class _PersonalDetailsState extends State<PersonalDetails> {
         child: InkWell(
           borderRadius: BorderRadius.circular(25),
           onTap: () {
-            if (_formKey.currentState!.validate()){
+            // if (_formKey.currentState!.validate()){
+            //   if(detailsController.pImage!=null){
+            //     Get.back();
+            //   }else{
+            //     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            //         duration: Duration(seconds: 2),
+            //
+            //         content: Text("Please Select Profile Photo.")));
+            //   }
+            //
+            // }
+            if(detailsController.fullName.text.isEmpty){
+              detailsController.showValidator(msg: "Enter Your Name");
+            }else if(detailsController.designation.text.isEmpty){
+              detailsController.showValidator(msg: "Enter Your Designation");
+            }else if(detailsController.pImage==null){
+              detailsController.showValidator(msg: "Select Your Profile Photo");
+            }else{
               Get.back();
             }
             debugPrint(detailsController.fullName.text);
@@ -223,11 +247,5 @@ class _PersonalDetailsState extends State<PersonalDetails> {
     );
   }
 
-// Future getImageFromGallery() async {
-//   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-//
-//   setState(() {
-//     if (pickedFile != null) {}
-//   });
-// }
+
 }

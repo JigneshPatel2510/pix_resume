@@ -37,138 +37,152 @@ class _ContactDetailsState extends State<ContactDetails> {
         key: _formKey,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  "Email",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: .5,
-                      fontSize: 12),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    "Email",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: .5,
+                        fontSize: 12),
+                  ),
                 ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey.shade400)),
-                  child: TextFormField(
-                    validator: (value) {
-                      if(value==null || value.isEmpty){
-                        return "Please enter your e-mail";
-                      }
-                      return null;
-                    },
-                    controller: detailsController.email,
-                    decoration: InputDecoration(
-                        hintText: "Enter Your Email Address",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 10)),
-                  )),
-              const SizedBox(
-                height: 15,
-              ),
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  "Social Media Link",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: .5,
-                      fontSize: 12),
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.grey.shade400)),
+                    child: TextFormField(
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if(value==null || value.isEmpty){
+                      //     return "Please enter your e-mail";
+                      //   }
+                      //   return null;
+                      // },
+                      controller: detailsController.email,
+                      decoration: InputDecoration(
+                          hintText: "Enter Your Email Address",
+                          hintStyle: TextStyle(color: Colors.grey.shade400),
+                          border: InputBorder.none,
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 10)),
+                    )),
+                const SizedBox(
+                  height: 15,
                 ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey.shade400)),
-                  child: TextFormField(
-                    validator: (value) {
-                      if(value==null || value.isEmpty){
-                        return"Please fill your social media link";
-                      }
-                    },
-                    controller: detailsController.socialMediaLink,
-                    decoration: InputDecoration(
-                        hintText: "Enter Your Social Media Link",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 10)),
-                  )),
-              const SizedBox(
-                height: 15,
-              ),
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  "Mobile Number",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: .5,
-                      fontSize: 12),
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    "Social Media Link",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: .5,
+                        fontSize: 12),
+                  ),
                 ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey.shade400)),
-                  child: TextFormField(
-                    validator: (value) {
-                      if(value==null || value.isEmpty){
-                        return "Please enter your mobile number";
-                      }
-                    },
-                    maxLength: 10,
-                    controller: detailsController.mobileNumber,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      counterText: "",
-                        hintText: "Enter Your Mobile Number",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 10)),
-                  )),
-              const SizedBox(
-                height: 15,
-              ),
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  "Address",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: .5,
-                      fontSize: 12),
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.grey.shade400)),
+                    child: TextFormField(
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if(value==null || value.isEmpty){
+                      //     return"Please fill your social media link";
+                      //   }
+                      // },
+                      controller: detailsController.socialMediaLink,
+                      decoration: InputDecoration(
+                          hintText: "Enter Your Social Media Link",
+                          hintStyle: TextStyle(color: Colors.grey.shade400),
+                          border: InputBorder.none,
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 10)),
+                    )),
+                const SizedBox(
+                  height: 15,
                 ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey.shade400)),
-                  child: TextFormField(
-                    validator: (value) {
-                      if(value==null || value.isEmpty){
-                        return "Please enter your address";
-                      }
-                    },
-                    controller: detailsController.address,
-                    decoration: InputDecoration(
-                        hintText: "Enter Your Address",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 10)),
-                  )),
-              const SizedBox(
-                height: 15,
-              ),
-            ],
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    "Mobile Number",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: .5,
+                        fontSize: 12),
+                  ),
+                ),
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.grey.shade400)),
+                    child: TextFormField(
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if(value==null || value.isEmpty){
+                      //     return "Please enter your mobile number";
+                      //   }
+                      // },
+                      maxLength: 10,
+                      controller: detailsController.mobileNumber,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        counterText: "",
+                          hintText: "Enter Your Mobile Number",
+                          hintStyle: TextStyle(color: Colors.grey.shade400),
+                          border: InputBorder.none,
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 10)),
+                    )),
+                const SizedBox(
+                  height: 15,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    "Address",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: .5,
+                        fontSize: 12),
+                  ),
+                ),
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.grey.shade400)),
+                    child: TextFormField(
+                      // onChanged: (value) {
+                      //   _formKey.currentState!.validate();
+                      // },
+                      // validator: (value) {
+                      //   if(value==null || value.isEmpty){
+                      //     return "Please enter your address";
+                      //   }
+                      // },
+                      controller: detailsController.address,
+                      decoration: InputDecoration(
+                          hintText: "Enter Your Address",
+                          hintStyle: TextStyle(color: Colors.grey.shade400),
+                          border: InputBorder.none,
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 10)),
+                    )),
+                const SizedBox(
+                  height: 15,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -179,7 +193,19 @@ class _ContactDetailsState extends State<ContactDetails> {
         child: InkWell(
           borderRadius: BorderRadius.circular(25),
           onTap: () {
-            if (_formKey.currentState!.validate()){
+            // if (_formKey.currentState!.validate()){
+            //   Get.back();
+            // }
+
+            if(detailsController.email.text.isEmpty){
+              detailsController.showValidator(msg: "Enter Your Email");
+            }else if(detailsController.socialMediaLink.text.isEmpty){
+              detailsController.showValidator(msg: "Enter Your Social Media Link");
+            }else if(detailsController.mobileNumber.text.isEmpty){
+              detailsController.showValidator(msg: "Enter Your Mobile Number");
+            }else if(detailsController.address.text.isEmpty){
+              detailsController.showValidator(msg: "Enter Your Address");
+            }else{
               Get.back();
             }
 
