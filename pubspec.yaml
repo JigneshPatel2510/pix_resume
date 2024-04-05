@@ -44,6 +44,7 @@ dependencies:
   lottie: ^2.7.0
   share_plus: ^7.2.2
   fluttertoast: ^8.2.4
+  widget_zoom: ^0.0.4
 
 
 dev_dependencies:

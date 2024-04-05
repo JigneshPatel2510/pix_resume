@@ -13,7 +13,7 @@ class BottomTabBar extends StatefulWidget {
 class _BottomTabBarState extends State<BottomTabBar> {
   int selectedtab=0;
 
-  List<dynamic> pages=[const HomePage(),const TemplatesPage(),const SettingPage()];
+  List<dynamic> pages=[const HomePage(),const TemplatesPage(isFromHome:false),const SettingPage()];
 
   changeTab(int index){
     setState(() {

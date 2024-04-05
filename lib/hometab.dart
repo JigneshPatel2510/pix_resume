@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:pix_resume/Controllers/details_controller.dart';
 import 'package:pix_resume/add_details.dart';
 import 'package:pix_resume/templatestab.dart';
 
@@ -12,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  DetailsController detailsController=Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +90,8 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton:InkWell(
         borderRadius: BorderRadius.circular(35),
         onTap: () {
-          Get.to( const TemplatesPage());
+
+          Get.to( const TemplatesPage(isFromHome: true,));
         },
         child: Container(
             decoration: BoxDecoration(

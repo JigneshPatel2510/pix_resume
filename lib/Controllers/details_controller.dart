@@ -36,6 +36,7 @@ class DetailsController extends GetxController {
   String? pBase64Image;
 
   String template="";
+  RxBool isLoading = false.obs;
 
   // final ImagePicker picker = ImagePicker();
 
@@ -127,7 +128,7 @@ class DetailsController extends GetxController {
     var body = {
       "temp_name": template,
       // "profile_photo": pBase64Image,
-      // "name": fullName.text,
+      "name": fullName.text,
       // "designation": designation.text,
       // "email": email.text,
       // "social_media_link": socialMediaLink.text,
@@ -157,6 +158,8 @@ class DetailsController extends GetxController {
       // "languages": languages.text,
     };
 
+    isLoading.value=true;
+
     http.Response response = await http.post(
         Uri.parse("https://codinghouse.in/resume/ResumeBuilder/GeneratePdf1"),
         body: body);
@@ -164,6 +167,7 @@ class DetailsController extends GetxController {
       // var data = jsonDecode(response.body);
       var urlData = response.body;
       downloadFile(urlData);
+      isLoading.value=false;
     }
   }
 
@@ -200,11 +204,16 @@ class DetailsController extends GetxController {
 RxList templatesList=[].obs;
 
   Future<void> showTemplates() async {
-
+    templatesList.clear();
+    isLoading.value=true;
   var response = await http.get(Uri.parse("https://codinghouse.in/resume/ResumeBuilder/GetTemplates"));
+
   if(response.statusCode==200){
     var templatesData=jsonDecode(response.body);
+    isLoading.value=true;
     templatesList.value=templatesData["data"];
+    isLoading.value=false;
+
   }
 
 
