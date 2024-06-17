@@ -44,10 +44,11 @@ class DetailsController extends GetxController {
     final ImagePicker picker = ImagePicker();
     XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
-    File imageFile = File(image!.path);
-    List<int> imageBytes = await imageFile.readAsBytes();
-    String base64Image = base64Encode(imageBytes);
+
     if (image != null) {
+      File imageFile = File(image.path);
+      List<int> imageBytes = await imageFile.readAsBytes();
+      String base64Image = base64Encode(imageBytes);
       pImage = image;
       pBase64Image = base64Image;
       return true;
@@ -130,12 +131,12 @@ class DetailsController extends GetxController {
       // "profile_photo": pBase64Image,
       "name": fullName.text,
       // "designation": designation.text,
-      // "email": email.text,
+      "email": email.text,
       // "social_media_link": socialMediaLink.text,
       // "mobile_number": mobileNumber.text,
       // "address": address.text,
       // "summary": summary.text,
-      // "work_experience":experience,   //List
+      "experience":experience,   //List
       // "company_name": companyName,
       // "company_address": companyAddress,
       // "level_of_position": companyAddress,
@@ -162,7 +163,7 @@ class DetailsController extends GetxController {
 
     http.Response response = await http.post(
         Uri.parse("https://codinghouse.in/resume/ResumeBuilder/GeneratePdf1"),
-        body: body);
+        body: jsonEncode(body));
     if (response.statusCode == 200) {
       // var data = jsonDecode(response.body);
       var urlData = response.body;
@@ -170,6 +171,7 @@ class DetailsController extends GetxController {
       isLoading.value=false;
     }
   }
+
 
   RxBool downloading = false.obs;
 

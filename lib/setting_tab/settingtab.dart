@@ -16,6 +16,7 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         leadingWidth: 0,
         backgroundColor: Colors.transparent,
         elevation: 0,

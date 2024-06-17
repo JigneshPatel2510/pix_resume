@@ -31,7 +31,7 @@ class _SplashState extends State<Splash> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Lottie.asset('assets/lottiefiles/splash_.json'),
+              Lottie.asset('assets/lottiefiles/splash_.json',),
               const SizedBox(height: 10),
               const Text("CV Maker",style: TextStyle(color: Colors.white,fontSize: 30),)
             ],
